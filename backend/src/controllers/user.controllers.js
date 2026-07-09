@@ -102,10 +102,9 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  //taking username or email and password from request body
+
   const { emailOrUsername, password } = req.body;
 
-  // Validate input fields
   if (!emailOrUsername) {
     throw new ApiError(400, "Email or Username is required");
   }
@@ -113,7 +112,6 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Password is required");
   }
 
-  // finding user
  const user = await User.findOne({
    $or: [
      { email: emailOrUsername.toLowerCase() },
