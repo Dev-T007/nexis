@@ -9,7 +9,8 @@ const MyChannel = () => {
 
   useEffect(() => {
     if (currentUser?.username) {
-      navigate(`/channel/${currentUser.username}`, { replace: true });
+      const username = currentUser.username;
+      navigate(`/channel/${username}`, { replace: true });
     }
   }, [currentUser]);
 

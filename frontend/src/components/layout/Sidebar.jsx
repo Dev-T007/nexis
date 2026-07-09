@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import {
   Home,
   PlaySquare,
@@ -10,21 +11,21 @@ import {
   MessageSquare,
   Bookmark,
 } from "lucide-react";
-
-
-const user = localStorage.getItem("user");
-const username = user ? JSON.parse(user).username : null;
-const navItems = [
-  { icon: Home, label: "Home", path: "/" },
-  { icon: PlaySquare, label: "Subscriptions", path: "/subscriptions" },
-  { icon: History, label: "History", path: "/history" },
-  { icon: ThumbsUp, label: "Liked Videos", path: "/liked-videos" },
-  { icon: Bookmark, label: "Saved Videos", path: "/saved-videos" },
-  { icon: Users, label: "My Channel", path: `/channel/${username}` },
-  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-];
+import { selectCurrentUser, selectIsAuthenticated } from "../../features/auth/authSlice";
 
 const Sidebar = ({ isOpen }) => {
+  const currentUser = useSelector(selectCurrentUser);
+  const username = currentUser?.username || '';
+
+  const navItems = [
+    { icon: Home, label: "Home", path: "/" },
+    { icon: PlaySquare, label: "Subscriptions", path: "/subscriptions" },
+    { icon: History, label: "History", path: "/history" },
+    { icon: ThumbsUp, label: "Liked Videos", path: "/liked-videos" },
+    { icon: Bookmark, label: "Saved Videos", path: "/saved-videos" },
+    { icon: Users, label: "My Channel", path: `/channel/${username}` },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
+  ];
 
   return (
     <aside

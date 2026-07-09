@@ -1,10 +1,11 @@
-import React from 'react'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { setCredentials }from '../features/auth/authSlice';
 
 const schema = z.object({
   emailOrUsername: z.string().min(1, "Email or Username is required"),
@@ -15,7 +16,8 @@ const Login = () => {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -24,9 +26,19 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
 
+
   const onSubmit = async (data) => {
     setLoading(true);
     setError('');
+    const storedUser = localStorage.getItem('user');
+    if(storedUser) {
+        dispatch(setCredentials({
+          user: JSON.parse(storedUser)
+        }));
+        navigate("/");
+        setLoading(false);
+        return;
+    }
     try {
       await login(data);
     } catch (err) {
