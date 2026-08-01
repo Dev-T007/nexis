@@ -25,9 +25,13 @@ feed, efficient pagination, and a modern React frontend.
 
 ## Folder Structure
 
-    nexis/
-    ├── backend/     # Express API, MongoDB models, aggregation logic
-    └── frontend/    # React app, Redux store, React Query hooks
+## Folder Structure
+
+```
+nexis/
+├── backend/ # Express API, MongoDB models, aggregation logic
+└── frontend/ # React app, Redux store, React Query hooks
+```
 
 ## Getting Started
 
