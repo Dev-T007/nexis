@@ -1,19 +1,20 @@
 # Nexis
 
-A full-stack video platform built with the MERN stack, featuring a mixed content 
+A full-stack video platform built with the MERN stack, featuring a mixed content
 feed, efficient pagination, and a modern React frontend.
 
 🔗 **Live:** [nexis-7.vercel.app](https://nexis-7.vercel.app/)
 
 ## Features
 
-- **Mixed content feed** — combines videos, tweets, and playlists into a single 
-  home feed using MongoDB's `$unionWith` aggregation
+- **Mixed content feed** — combines videos, tweets, and playlists into a single
+  home feed using MongoDB's aggregation pipelines
 - **Dual-pool pagination** for smooth infinite scroll performance
 - **Authentication** — secure auth flow using httpOnly cookies
 - **Channel & dashboard system** — user channels with video management
 - **Upload flow** for videos with metadata handling
-- **Animated interactions** — like buttons and UI transitions via Framer Motion (if used) / CSS
+- **State management** — Redux Toolkit for global/auth state, React Query for
+  server-state caching and syncing
 
 ## Tech Stack
 
@@ -24,31 +25,37 @@ feed, efficient pagination, and a modern React frontend.
 
 ## Folder Structure
 
-nexis/
-├── backend/ # Express API, MongoDB models, aggregation logic
-└── frontend/ # React app, Redux store, React Query hooks
+    nexis/
+    ├── backend/     # Express API, MongoDB models, aggregation logic
+    └── frontend/    # React app, Redux store, React Query hooks
 
 ## Getting Started
 
-```bash
-# Clone the repo
-git clone https://github.com/Dev-T007/nexis.git
+Clone the repo:
 
-# Install dependencies (backend)
-cd backend && npm install
+    git clone https://github.com/Dev-T007/nexis.git
 
-# Install dependencies (frontend)
-cd ../frontend && npm install
+Install backend dependencies:
 
-# Set up environment variables (see .env.example)
+    cd backend
+    npm install
 
-# Run backend
-npm run dev
+Install frontend dependencies:
 
-# Run frontend
-npm run dev
-```
+    cd ../frontend
+    npm install
+
+Set up environment variables (see `.env.example` in each folder if available).
+
+Run backend:
+
+    npm run dev
+
+Run frontend:
+
+    npm run dev
 
 ## Author
 
-Built by [Dev](https://github.com/Dev-T007) — Full-stack developer, final-year CS Engineering student.
+Built by [Dev](https://github.com/Dev-T007) — Full-stack developer, final-year
+CS Engineering student.
