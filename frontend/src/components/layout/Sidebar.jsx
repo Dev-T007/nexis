@@ -5,10 +5,8 @@ import {
   PlaySquare,
   ThumbsUp,
   History,
-  ListVideo,
   Users,
   LayoutDashboard,
-  MessageSquare,
   Bookmark,
 } from "lucide-react";
 import { selectCurrentUser, selectIsAuthenticated } from "../../features/auth/authSlice";
@@ -16,7 +14,7 @@ import { selectCurrentUser, selectIsAuthenticated } from "../../features/auth/au
 const Sidebar = ({ isOpen }) => {
   const currentUser = useSelector(selectCurrentUser);
   const username = currentUser?.username || '';
-
+  
   const navItems = [
     { icon: Home, label: "Home", path: "/" },
     { icon: PlaySquare, label: "Subscriptions", path: "/subscriptions" },

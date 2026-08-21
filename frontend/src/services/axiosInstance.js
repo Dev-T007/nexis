@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
+import store from "../store/store";
+import { logout } from "../features/auth/authSlice";
 
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
@@ -59,6 +61,9 @@ axiosInstance.interceptors.response.use(
             }
             catch (err) {
                 processQueue(err, null);
+                localStorage.removeItem('user');
+                store.dispatch(logout());
+                window.location.href = '/login';
                 return Promise.reject(err);
             }
             finally {
