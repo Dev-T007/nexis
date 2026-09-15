@@ -1,4 +1,7 @@
 import multer from "multer";
+import { randomUUID } from "crypto";
+import path from "path";
+import { ApiError } from "../utils/ApiError.js";
 
 const allowedMimeTypes = [
   "image/jpeg",
@@ -22,7 +25,10 @@ export const upload = multer({
   },
   fileFilter: (req, file, cb) => {
     if (!allowedMimeTypes.includes(file.mimetype)) {
-      return cb(new Error("Unsupported file type"), false);
+      return cb(
+        new ApiError(400, `Unsupported file type: ${file.mimetype}`),
+        false
+      );
     }
     cb(null, true);
   },
