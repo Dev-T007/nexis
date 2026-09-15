@@ -6,6 +6,7 @@ import { sanitizeBody } from "./utils/sanitize.js";
 import hpp from "hpp";
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(
   cors({
