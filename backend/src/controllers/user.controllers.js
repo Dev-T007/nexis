@@ -116,7 +116,7 @@ const loginUser = asyncHandler(async (req, res) => {
      { email: emailOrUsername.toLowerCase() },
      { username: emailOrUsername.toLowerCase() },
    ],
- }).select("refreshToken");
+ });
 
   if (!user) {
     throw new ApiError(404, "User not found");
