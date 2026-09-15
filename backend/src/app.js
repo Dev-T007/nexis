@@ -2,7 +2,7 @@ import express from "express";
 import cookie_Parser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
-import mongoSanitize from "express-mongo-sanitize";
+import { sanitizeBody } from "./utils/sanitize.js";
 import hpp from "hpp";
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.urlencoded({
     extended: true, 
     limit:'10mb'}));
 
-app.use(mongoSanitize());
+app.use(sanitizeBody);
 app.use(hpp()); 
 
 app.use(express.static('public'));
