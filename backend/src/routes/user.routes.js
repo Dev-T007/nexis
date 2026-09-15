@@ -15,10 +15,12 @@ import {
 } from "../controllers/user.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import { upload } from "../middlewares/multer.middlewares.js";
+import { loginLimiter , registerLimiter } from "../middlewares/rateLimiter.middlewares.js";
 
 const router = Router();
 
 router.route("/register").post(
+  registerLimiter,
   upload.fields([
     {
       name: "avatar",
@@ -32,7 +34,7 @@ router.route("/register").post(
   registerUser
 );
 
-router.route("/login").post(loginUser);
+router.route("/login").post(loginLimiter, loginUser);
 
 //secured routes
 router.route("/logout").post(verifyJWT, logoutUser);
