@@ -117,7 +117,7 @@ const loginUser = asyncHandler(async (req, res) => {
      { email: emailOrUsername.toLowerCase() },
      { username: emailOrUsername.toLowerCase() },
    ],
- });
+ }).select("refreshToken");
 
   if (!user) {
     throw new ApiError(404, "User not found");
@@ -133,6 +133,10 @@ const loginUser = asyncHandler(async (req, res) => {
   //generating access token and refresh token
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
     user._id
+  );
+
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshTokens"
   );
 
   //setting refresh token in http only cookie
@@ -155,11 +159,7 @@ const loginUser = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, accessOptions)
     .cookie("refreshToken", refreshToken, refreshOptions)
     .json(
-      new ApiResponse(200, "User logged in successfully", {
-        user,
-        accessToken,
-        refreshToken,
-      })
+      new ApiResponse(200, "User logged in successfully", {user: loggedInUser})
     );
 });
 
